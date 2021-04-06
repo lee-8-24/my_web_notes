@@ -434,4 +434,300 @@ div.red{
 
 复合选择器可以混合使用
 
-==看到32集12min==
+
+
+### :flags: 关系选择器
+
+**子元素选择器**
+
+作用：选择指定元素的指定子元素
+
+结论：父元素>子元素
+
+**后代元素选择器**
+
+作用：选择中指定元素内的指定代元素
+
+语法：祖先 后代
+
+**兄弟元素选择器**
+
+作用：选择下一个兄弟
+
+语法：前一个+下一个
+
+### :flags: 属性选择器
+
+`title`鼠标移上去就会提示
+
+`[属性名] `选择含有指定属性的元素
+
+`[属性名=属性值]` 选择含有指定属性和指定值的元素
+
+`[属性值^=属性值]` 选择属性名与属性值开头的元素，结尾用$
+
+`[属性名*=属性值]`选择属性值中含有某值的元素的元素
+
+### :flags: 伪类选择器
+
+根据ul>li 可以直接生成
+
+```html
+ul>li*5
+```
+
+vs自带插件，会处理
+
+伪类，不存在的类，用来描述一个元素的特殊状态
+
+比如第一个子元素，背点击的元素，鼠标移入的元素
+
+特点：一般情况下，都是以：开头
+
+```css
+            ul>li:first-child{
+                color:red;
+            }
+```
+
+`first-child`第一个子元素
+
+`last-child`最后一个元素值
+
+`nth-child()`选中那个填入特殊值即可
+
+`nth-child(2n)`表示选中偶数个2n+1表示奇数位
+
+以上这些伪类，都是根据所有子元素进行排序
+
+`first-of-type`
+
+`last-of-type`
+
+`nth-of-type`
+
+只找相同类型
+
+not()否定伪类，将符合条件的元素从选择器中去除
+
+`ul>li:not(:nth-of-type(3))`{
+
+}
+
+除了的意思
+
+
+
+**超链接元素的伪类**
+
+`a:link`：表示没有访问过的连接
+
+`a:visited：`表示访问过的链接
+
+用来表示访问过的连接
+
+> 由于隐私的原因，visited只能改颜色
+
+下面两种都可以用：
+
+`:hover`表示鼠标移入状态 时变化
+
+`:active`表示点击不移开
+
+
+
+**伪元素选择器**
+
+首字母下沉效果;
+
+```css
+p::first-letter{
+
+​	font-size:50px;
+
+}
+
+p::first-line{
+
+background-color:yellow;
+
+}
+div::before{
+    content: '('
+}
+div::before{
+    content:')'
+}
+```
+
+> 前后会加上括号
+
+### :flags: 样式的继承
+
+我们为一个元素设置的样式同时也会应用到它的后代上
+
+继承发生在祖先后代之间
+
+继承的设计是为了方便我们的开发，继承的设计我们可以将一些通用的样式统一设置到共同的祖先元素上，这样只需设置一次即可让所有的元素拥有该样式
+
+并不是所有的样式都会被继承，背景，布局等
+
+
+
+### :flags: 选择器的权重
+
+当通过不同的选择器，选中相同的选择器，并且为相同的样式设置不同的值时，样式冲突
+
+由选择器优先级决定
+
+选择器权重：内联样式--id选择器--类选择器--元素选择器
+
+
+
+### :flags: em和rem
+
+==em==是相对于元素字体大小来计算的
+
+1em=1front-size
+
+==rem==是相对于根元素的字体大小来计算的
+
+
+
+### :flags: HSL值
+
+HSL值/HLSA值
+
+H  色相
+
+S  饱和度
+
+L  亮度
+
+### :flags: 文档流
+
+**layout**
+
+网页是一个多层的结构，一层螺着一层
+
+我们可以用css可以分每一层设置样式
+
+作为用户来说只能看到最上层
+
+文档流是网页的基础
+
+所创建的元素默认在文档流中排列
+
+**元素中两个状态**
+
+- 在文档流中
+- 不在文档流
+
+**元素在文档流中有什么特点**
+
+- 块元素
+  - 会在页面中独占一行，总会
+  - 默认宽度父元素的全部
+  - 默认高度是被内容 (子元素)撑开
+  - 自下向上垂直排列
+- 行内元素
+  - `<span>`行内元素不会独占一行
+  - 行内元素会在页面从左至右水平排列
+  - 行内元素的默认宽度和高度都是被内容撑开
+
+
+
+### :flags: 默认样式
+
+通常情况，浏览器都会为元素设置一些默认值
+
+默认样式的存在会影响到页面布局，通常情况下便些网页时必须去除浏览器的默认样式
+
+```
+body{
+	margin:0%;
+	padding:0;
+}
+```
+
+去掉边距，p与ul等也是一样的
+
+```
+*{
+	margin:0;
+	padding:0;
+}
+```
+
+全部去掉`*` 表示全部
+
+### :flags: 导航条
+
+```html
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>导航条</title>
+        <link rel="stylesheet" href="../CSS/reset.css">
+        <style>
+            .nav{
+                width: 1210px;
+                height: 48px;
+                background-color: darkgray;
+                margin: 100px auto;
+            }
+            .nav li{
+                float: left;
+                /* 设置文字在付元素中垂直居中*/
+                line-height: 48px;
+
+                
+            }
+
+            .nav a{
+                /* 将a转换为快元素 */
+                /* display: block; */
+                /* 去除下划线 */
+                text-decoration: none;
+                padding-left:  50px;
+                padding-right: 50px;
+                padding-top:10px; 
+                padding-bottom:12px;
+                font-size: 18px;
+                color: white;
+            }
+
+            .nav a:hover{
+                background-color:black;
+                color: white;
+
+            }
+        </style>
+    </head>
+
+    <body>
+        <ul class="nav">
+            <li>
+                <a href="#">HTML/CSS</a>
+            </li>
+            <li>
+                <a href="#">Browser Side</a>
+            </li>
+            <li>
+                <a href="#">Server Side</a>
+            </li>
+            <li>
+                <a href="#">Programming</a>
+            </li>
+            <li>
+                <a href="#">XML</a>
+            </li>
+            <li>
+                <a href="#">Reference</a>
+            </li>
+        </ul>
+        
+    </body>
+</html>
+```
+
